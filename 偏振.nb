@@ -1,0 +1,630 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     29308,        622]
+NotebookOptionsPosition[     28715,        603]
+NotebookOutlinePosition[     29128,        620]
+CellTagsIndexPosition[     29085,        617]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", "[", 
+   RowBox[{"Ax_", ",", "Ay_", ",", "dphase_"}], "]"}], ":=", 
+  "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"k", "=", "Pi"}], ",", 
+      RowBox[{"w", "=", 
+       RowBox[{"2", "Pi"}]}], ",", "fx", ",", "fy", ",", "result", ",", "f3", 
+      ",", "pts0"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"fx", "=", 
+      RowBox[{"Function", "[", 
+       RowBox[{"t", ",", 
+        RowBox[{"Ay", " ", 
+         RowBox[{"Cos", "[", 
+          RowBox[{
+           RowBox[{"w", " ", "t"}], "-", 
+           RowBox[{"k", " ", "0"}]}], "]"}]}], ",", "Listable"}], "]"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"fy", "=", 
+      RowBox[{"Function", "[", 
+       RowBox[{"t", ",", 
+        RowBox[{"Ay", " ", 
+         RowBox[{"Cos", "[", 
+          RowBox[{
+           RowBox[{"w", " ", "t"}], "-", 
+           RowBox[{"k", " ", "0"}], "+", "dphase"}], "]"}]}], ",", 
+        "Listable"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"f3", "[", "t_", "]"}], ":=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"Arrow", "@", 
+         RowBox[{"Tube", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"z", ",", "0", ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"z", ",", 
+              RowBox[{"Ay", " ", 
+               RowBox[{"Cos", "[", 
+                RowBox[{
+                 RowBox[{"w", " ", "t"}], "-", " ", 
+                 RowBox[{"k", " ", "z"}]}], "]"}]}], ",", 
+              RowBox[{"Ay", " ", 
+               RowBox[{"Cos", "[", 
+                RowBox[{
+                 RowBox[{"w", " ", "t"}], "-", 
+                 RowBox[{"k", " ", "z"}], "+", "dphase"}], "]"}]}]}], "}"}]}],
+            "}"}], "]"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"z", ",", "0", ",", "2", ",", "0.05"}], "}"}]}], "]"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"pts0", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0", ",", 
+          RowBox[{"Ay", " ", 
+           RowBox[{"Cos", "[", 
+            RowBox[{
+             RowBox[{"w", " ", "t"}], "-", " ", 
+             RowBox[{"k", " ", "0"}]}], "]"}]}], ",", 
+          RowBox[{"Ay", " ", 
+           RowBox[{"Cos", "[", 
+            RowBox[{
+             RowBox[{"w", " ", "t"}], "-", 
+             RowBox[{"k", " ", "0"}], "+", "dphase"}], "]"}]}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"t", ",", "0", ",", "1", ",", "0.01"}], "}"}]}], "]"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"result", "=", 
+      RowBox[{"Transpose", "[", 
+       RowBox[{"Through", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"fx", ",", "fy"}], "}"}], "[", 
+         RowBox[{"Range", "[", 
+          RowBox[{"0", ",", "1", ",", "0.01"}], "]"}], "]"}], "]"}], "]"}]}], 
+     ";", 
+     RowBox[{"DynamicModule", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"i", "=", "1"}], "}"}], ",", 
+       RowBox[{"Column", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Slider", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "i", "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"1", ",", "100", ",", "1"}], "}"}]}], "]"}], ",", 
+            RowBox[{"Dynamic", "[", "i", "]"}]}], "}"}], ",", 
+          RowBox[{"Row", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Graphics", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"Red", ",", 
+                   RowBox[{"Point", "[", "result", "]"}]}], "}"}], ",", 
+                 RowBox[{"Point", "[", 
+                  RowBox[{"{", 
+                   RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], "}"}], "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"Arrowheads", "[", "0.1", "]"}], ",", 
+                   RowBox[{"Arrow", "[", 
+                    RowBox[{"result", "[", 
+                    RowBox[{"[", 
+                    RowBox[{";;", "25"}], "]"}], "]"}], "]"}]}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"Dynamic", "@", 
+                   RowBox[{"Arrow", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], ",", 
+                    RowBox[{"result", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "}"}], "]"}]}], "}"}], 
+                 ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"EdgeForm", "[", "Black", "]"}], ",", 
+                   RowBox[{"Opacity", "[", "0", "]"}], ",", 
+                   RowBox[{"Rectangle", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "Ax"}], ",", 
+                    RowBox[{"-", "Ay"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"Ax", ",", "Ay"}], "}"}]}], "]"}]}], "}"}]}], 
+                "}"}], ",", 
+               RowBox[{"ImageSize", "\[Rule]", "200"}]}], "]"}], ",", 
+             RowBox[{"Graphics3D", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"Arrowheads", "[", "0.02", "]"}], ",", "Blue", ",", 
+                 RowBox[{"f3", "[", 
+                  RowBox[{"Dynamic", "[", 
+                   RowBox[{"i", "/", "100"}], "]"}], "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"Red", ",", 
+                   RowBox[{"Point", "[", "pts0", "]"}]}], "}"}]}], "}"}], ",", 
+               RowBox[{"ImageSize", "\[Rule]", "500"}], ",", 
+               RowBox[{"BoxRatios", "\[Rule]", 
+                RowBox[{"{", 
+                 RowBox[{"3", ",", " ", "1", ",", " ", "1"}], "}"}]}], ",", 
+               RowBox[{"Boxed", "\[Rule]", "False"}], ",", 
+               RowBox[{"ViewPoint", "\[Rule]", 
+                RowBox[{"{", 
+                 RowBox[{"1.152245850052173`", ",", 
+                  RowBox[{"-", "3.1807506093481455`"}], ",", 
+                  "0.07179876161150522`"}], "}"}]}]}], "]"}]}], "}"}], 
+           "]"}]}], "}"}], "]"}]}], "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.8109598979420757`*^9, 3.8109602055696573`*^9}, {
+   3.8109615616433363`*^9, 3.8109618492927513`*^9}, {3.810961906349715*^9, 
+   3.810961994193372*^9}, {3.810962042244439*^9, 3.810962044588026*^9}, {
+   3.8109622293650475`*^9, 3.8109622884439363`*^9}, {3.810962343925308*^9, 
+   3.8109623473313203`*^9}, 3.8109624785661325`*^9, {3.810962704244186*^9, 
+   3.8109627235709324`*^9}, {3.8109636429854684`*^9, 
+   3.8109640891925435`*^9}, {3.810964130246811*^9, 3.810964185334113*^9}, 
+   3.810964223378723*^9, {3.8109642683857574`*^9, 3.8109642705273113`*^9}, {
+   3.810964357443905*^9, 3.81096446307736*^9}, {3.8109649245134935`*^9, 
+   3.810965071063573*^9}, {3.810965137745695*^9, 3.8109652021345034`*^9}, {
+   3.8109669714743843`*^9, 3.810966978601338*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"970452ba-4113-4ce2-8331-d8d54fe47add"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"f", "[", 
+  RowBox[{"1", ",", "1", ",", 
+   RowBox[{"Pi", "/", "3"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.8109601497757936`*^9, 3.8109601579494267`*^9}, {
+   3.810960211428605*^9, 3.810960216878767*^9}, {3.8109621390250864`*^9, 
+   3.810962195463502*^9}, 3.810962308314312*^9, 3.810962357049364*^9, {
+   3.810962731583151*^9, 3.8109627340673943`*^9}, {3.810963999490382*^9, 
+   3.8109640004746876`*^9}, 3.810965219642185*^9, {3.810965277419609*^9, 
+   3.810965314751917*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"a4da9fb9-6b48-4037-9006-dcd6ed5fadc3"],
+
+Cell[BoxData[
+ DynamicModuleBox[{$CellContext`i$$ = 83}, 
+  TagBox[GridBox[{
+     {
+      RowBox[{"{", 
+       RowBox[{
+        SliderBox[Dynamic[$CellContext`i$$], {1, 100, 1}], ",", 
+        DynamicBox[ToBoxes[$CellContext`i$$, StandardForm],
+         ImageSizeCache->{14., {0., 9.}}]}], "}"}]},
+     {
+      TemplateBox[{
+        GraphicsBox[{{
+           RGBColor[1, 0, 0], 
+           PointBox[CompressedData["
+1:eJw91Q9MlHUYB3BOzliQFh4xEATJoExnGf0BYz0ZrjSPPwElwhEG3YhZAZZr
+HKNTc1oWGZIxd9DKERwllUxAkfllJpAhu8RIQcKDA++Og3traJm5I/N5vNtu
+727v7n1/7+/5fr5vVF5Rmn6Oj4+P/ub3/yN//iDVraOVPInjGFAUujo3Ndz+
+zjD5Dm7LKIBCZVFfLp/fd4Fm74w+NPGWQpUrIw/H3DVA1oh7Fh30uGna0Gz4
+9/GzNJuxRjO/yE3XM589NFjzM01kKbXtndNUXhGcONh8kj66d3h4w5UpKg19
+/xnn5hba2Lk9+Yj/FPUv8KjcJftp14rXZo+rXeSa2d19rPhrmK9Um961OSlv
+Q4Jp08l2TG7Ozg8wO2iep7KuKbMLwUf7fVvT7VTQVqkcWNUHzeLAlyz2CQrQ
+XYgzGvtxXNXi6daPU4HKFqVK+Q2vZG1VL7GMkWXhHVH/+A0hdVlIwnvRo3Qg
+tq+wrv53pDRCN29ghBaU/rWpqcqKmu3Rp/+mizR4dl/ousQxhDWa12btPU/3
+OdamlFhtSHU+/KTSfY4GAsY+31k4gRq/8OuBAxZ6PXCR5erwZZQbfPXhN3qo
+bLXjcFK8A9bsr3Jc/p20LG9XyvJyJ3ZWWcP8NT/Qid7ILS80TMJPFxQbU1+Z
+0KjNdBhaXSjj81gxYmr5tnEK4/x/LDnmjrEbp7GNr4+wxUt7M+Lc+JTvjxRN
+XdKqfjeSeX0w+hgevaFVEMrrx/cJtW9HmBXU8vPBvC/as8amIIOfHx1JL9/9
+mEdBOu8Pwrs8xb9cU5DD+4eegmufRZ5T0MH7i6Id9Xufr1AQxPuPhcnlf37y
+wM3fPB/MRLcZdQfdcPL8UOwynnnCM40Gni+qjbPf/fjUNGT+ONV0xtSTPYVM
+zge6LCUj9+e6sIfzg1ebe48MPTeJcc4XPmhbmqQOckLyh1MnYs3ne+yQfKJw
+tDW3Lv8yJL+IK9mf3u8YxxzON9b/9MjT1kwbJP9Qr+5YmdcyCvEBNfvwnp9h
+HxAfKGcf8Mj1P2Yf3vsr7MO7Pjv7gE3Wv4V9QHxgB/tAljz/Vs0tH9gt+zPE
+Pkh8YB37IPGBEPZB4gP57IOCZT4q9kHtMj89+6Bcme9p9kHJMv9q9kEvSj4C
+2QdVSX4usg8KlnyJD0qT/P3KPsgs+dSzDyqV/BrYB01Jvh9kH/Sm5F98kP+e
+L7Txpd90mNkHpYmfh9gHXRJf4oPeEH8h7INM4lN8kFb8ig+KEN/ig0ziv4F9
+0EbpB/FB66U/xAfppF/EBx2V/ilhH3S7n8LYB2mkv8QHuaTfxAeJDxIfJPOn
+Lvbh7U/xQRXSrznsw9u/H7IPbz93sQ+6JP1dzD68/R7PPkh8kJZ9eN8Pc9kH
+3X5/iA/6D32NXB8=
+            "]]}, 
+          PointBox[{{0, 0}}], {
+           Arrowheads[0.1], 
+           ArrowBox[CompressedData["
+1:eJwBoQFe/iFib1JlAgAAABkAAAACAAAAAAAAAAAA8D8BAAAAAADgP/5D5L/V
+7+8/9QVQHOd03D8D2YBUZ7/vP3shoCwOzdg//wklrOVu7z+RMR+xJgzVP+Ae
+EB2i/u4/7Xqyevs10T//VEQTDm/uP/pYQqzZnMo/5VrvnbrA7T99jRZD2bLC
+P4sV3NxX9Ow/eRmDQOlrtT9ZwIFOtArsP9IS/gHucZU/hi5k/7sE6z/r84fG
+uXClv6j0l5t34+k/Ylc8m2DCur/qa1tjC6joPw3+kaStWMW/FrjSA7ZT5z9n
+t5HvmTrNvxMgEVXP5+U/C1zYOH9/0r+7AbX+xmXkP2cB4yEBT9a/Xlp1BCPP
+4j/PGgYh+Qfav1ArGDx+JeE/mTPNaaSm3b9Pqb9cDdXePxJ59mCtk+C/nIEl
+yfc/2z/Z0ZIZSUPivxupqEhaj9c/IuhIT3Hg479Q6S8378bTP9UL4paEaeW/
+nAcc+hHVzz9oER3P9dzmv316A2Uc/Mc/e0HosU056L/gW6Fd6wrAPytihk8s
+fem/hJPgGwoTsD++yx9ySqfqv25izQs=
+            "]]}, {
+           DynamicBox[
+            Typeset`ToBoxes[
+             Arrow[{{0, 0}, 
+               Part[$CellContext`result$8885, $CellContext`i$$]}], 
+             StandardForm, Graphics]]}, {
+           EdgeForm[
+            GrayLevel[0]], 
+           Opacity[0], 
+           RectangleBox[{-1, -1}, {1, 1}]}}, ImageSize -> 200], 
+        Graphics3DBox[{
+          Arrowheads[0.02], 
+          RGBColor[0, 0, 1], {
+           Arrow3DBox[
+            TubeBox[{{0., 0, 0}, {0., 
+               Cos[0. + 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               1.0471975511965976` + 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.05, 0, 0}, {0.05, 
+               Cos[0.15707963267948966` - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               0.890117918517108 + 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.1, 0, 0}, {0.1, 
+               Cos[0.3141592653589793 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               0.7330382858376183 + 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.15000000000000002`, 0, 0}, {0.15000000000000002`, 
+               Cos[0.471238898038469 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               0.5759586531581287 + 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.2, 0, 0}, {0.2, 
+               Cos[0.6283185307179586 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               0.418879020478639 + 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.25, 0, 0}, {0.25, 
+               Cos[0.7853981633974483 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               0.26179938779914935` + 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.30000000000000004`, 0, 0}, {0.30000000000000004`, 
+               Cos[0.942477796076938 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               0.10471975511965959` + 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.35000000000000003`, 0, 0}, {0.35000000000000003`, 
+               Cos[1.0995574287564276` - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               0.05235987755982996 - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.4, 0, 0}, {0.4, 
+               Cos[1.2566370614359172` - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               0.20943951023931962` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.45, 0, 0}, {0.45, 
+               Cos[1.413716694115407 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               0.36651914291880927` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.5, 0, 0}, {0.5, 
+               Cos[1.5707963267948966` - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               0.5235987755982989 - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.55, 0, 0}, {0.55, 
+               Cos[1.7278759594743864` - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               0.6806784082777888 - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.6000000000000001, 0, 0}, {0.6000000000000001, 
+               Cos[1.884955592153876 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               0.8377580409572785 - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.65, 0, 0}, {0.65, 
+               Cos[2.0420352248333655` - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               0.9948376736367679 - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.7000000000000001, 0, 0}, {0.7000000000000001, 
+               Cos[2.199114857512855 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               1.1519173063162575` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.75, 0, 0}, {0.75, 
+               Cos[2.356194490192345 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               1.3089969389957472` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.8, 0, 0}, {0.8, 
+               Cos[2.5132741228718345` - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               1.4660765716752369` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.8500000000000001, 0, 0}, {0.8500000000000001, 
+               Cos[2.6703537555513246` - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               1.623156204354727 - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.9, 0, 0}, {0.9, 
+               Cos[2.827433388230814 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               1.7802358370342162` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{0.9500000000000001, 0, 0}, {0.9500000000000001, 
+               Cos[2.9845130209103035` - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               1.9373154697137058` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1., 0, 0}, {1., 
+               Cos[3.141592653589793 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               2.0943951023931957` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.05, 0, 0}, {1.05, 
+               Cos[3.2986722862692828` - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               2.2514747350726854` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.1, 0, 0}, {1.1, 
+               Cos[3.455751918948773 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               2.408554367752175 - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.1500000000000001`, 0, 0}, {1.1500000000000001`, 
+               Cos[3.6128315516282625` - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               2.5656340004316647` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.2000000000000002`, 0, 0}, {1.2000000000000002`, 
+               Cos[3.769911184307752 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               2.7227136331111543` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.25, 0, 0}, {1.25, 
+               Cos[3.9269908169872414` - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               2.879793265790644 - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.3, 0, 0}, {1.3, 
+               Cos[4.084070449666731 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               3.0368728984701336` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.35, 0, 0}, {1.35, 
+               Cos[4.241150082346221 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               3.1939525311496233` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.4000000000000001`, 0, 0}, {1.4000000000000001`, 
+               Cos[4.39822971502571 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               3.351032163829113 - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.4500000000000002`, 0, 0}, {1.4500000000000002`, 
+               Cos[4.555309347705201 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               3.5081117965086035` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.5, 0, 0}, {1.5, 
+               Cos[4.71238898038469 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               3.6651914291880923` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.55, 0, 0}, {1.55, 
+               Cos[4.869468613064179 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               3.822271061867582 - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.6, 0, 0}, {1.6, 
+               Cos[5.026548245743669 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               3.9793506945470716` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.6500000000000001`, 0, 0}, {1.6500000000000001`, 
+               Cos[5.183627878423159 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               4.136430327226561 - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.7000000000000002`, 0, 0}, {1.7000000000000002`, 
+               Cos[5.340707511102649 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               4.293509959906052 - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.75, 0, 0}, {1.75, 
+               Cos[5.497787143782138 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               4.4505895925855405` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.8, 0, 0}, {1.8, 
+               Cos[5.654866776461628 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[4.60766922526503 - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.85, 0, 0}, {1.85, 
+               Cos[5.811946409141117 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[4.76474885794452 - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.9000000000000001`, 0, 0}, {1.9000000000000001`, 
+               Cos[5.969026041820607 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               4.9218284906240095` - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{1.9500000000000002`, 0, 0}, {1.9500000000000002`, 
+               Cos[6.1261056745000975` - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[5.0789081233035 - 2 Pi Dynamic[$CellContext`i$$/100]]}}]], 
+           Arrow3DBox[
+            TubeBox[{{2., 0, 0}, {2., 
+               Cos[6.283185307179586 - 2 Pi Dynamic[$CellContext`i$$/100]], 
+               Cos[
+               5.235987755982989 - 2 Pi Dynamic[$CellContext`i$$/100]]}}]]}, {
+           RGBColor[1, 0, 0], 
+           
+           Point3DBox[{{0, 1., 0.5000000000000001}, {
+             0, 0.9980267284282716, 0.4446351791849275}, {
+             0, 0.9921147013144779, 0.3875155864521031}, {
+             0, 0.9822872507286887, 0.3288666467385833}, {
+             0, 0.9685831611286311, 0.2689198206152657}, {
+             0, 0.9510565162951535, 0.20791169081775945`}, {
+             0, 0.9297764858882515, 0.14608302856241187`}, {
+             0, 0.9048270524660195, 0.08367784333231566}, {
+             0, 0.8763066800438636, 0.02094241988335705}, {
+             0, 0.8443279255020151, -0.04187565372919962}, {
+             0, 0.8090169943749475, -0.10452846326765333`}, {
+             0, 0.7705132427757893, -0.166768746716102}, {
+             0, 0.7289686274214116, -0.22835087011065555`}, {
+             0, 0.6845471059286886, -0.2890317969444715}, {
+             0, 0.6374239897486896, -0.3485720473218152}, {
+             0, 0.5877852522924731, -0.4067366430758001}, {
+             0, 0.5358267949789965, -0.4632960351198619}, {
+             0, 0.48175367410171516`, -0.5180270093731301}, {
+             0, 0.42577929156507266`, -0.5707135676844316}, {
+             0, 0.3681245526846781, -0.6211477802783103}, {
+             0, 0.30901699437494745`, -0.6691306063588579}, {
+             0, 0.24868988716485496`, -0.7144726796328031}, {
+             0, 0.18738131458572474`, -0.7569950556517563}, {
+             0, 0.12533323356430426`, -0.7965299180241961}, {
+             0, 0.06279051952931353, -0.8329212407100994}, {
+             0, 6.123233995736766*^-17, -0.8660254037844385}, {
+             0, -0.0627905195293134, -0.8957117602394129}, {
+             0, -0.12533323356430437`, -0.9218631515885004}, {
+             0, -0.18738131458572482`, -0.9443763702374811}, {
+             0, -0.24868988716485463`, -0.9631625667976581}, {
+             0, -0.30901699437494734`, -0.9781476007338056}, {
+             0, -0.368124552684678, -0.9892723329629883}, {
+             0, -0.4257792915650727, -0.9964928592495044}, {
+             0, -0.48175367410171543`, -0.9997806834748455}, {
+             0, -0.5358267949789969, -0.9991228300988584}, {
+             0, -0.587785252292473, -0.9945218953682734}, {
+             0, -0.6374239897486897, -0.9859960370705049}, {
+             0, -0.6845471059286887, -0.9735789028731603}, {
+             0, -0.7289686274214113, -0.9573194975320675}, {
+             0, -0.7705132427757891, -0.9372819894918916}, {
+             0, -0.8090169943749473, -0.9135454576426011}, {
+             0, -0.8443279255020151, -0.8862035792312146}, {
+             0, -0.8763066800438635, -0.8553642601605068}, {
+             0, -0.9048270524660194, -0.8211492091337044}, {
+             0, -0.9297764858882513, -0.7836934573258398}, {
+             0, -0.9510565162951535, -0.7431448254773945}, {
+             0, -0.9685831611286311, -0.6996633405133653}, {
+             0, -0.9822872507286887, -0.6534206039901056}, {
+             0, -0.9921147013144778, -0.6045991148623754}, {
+             0, -0.9980267284282716, -0.5533915492433441}, {
+             0, -1., -0.5000000000000004}, {
+             0, -0.9980267284282716, -0.4446351791849274}, {
+             0, -0.9921147013144779, -0.3875155864521032}, {
+             0, -0.9822872507286886, -0.328866646738583}, {
+             0, -0.9685831611286311, -0.2689198206152658}, {
+             0, -0.9510565162951535, -0.20791169081775893`}, {
+             0, -0.9297764858882512, -0.14608302856241157`}, {
+             0, -0.9048270524660195, -0.08367784333231579}, {
+             0, -0.8763066800438637, -0.020942419883357617`}, {
+             0, -0.8443279255020152, 0.041875653729199505`}, {
+             0, -0.8090169943749475, 0.10452846326765299`}, {
+             0, -0.7705132427757893, 0.1667687467161023}, {
+             0, -0.7289686274214116, 0.22835087011065544`}, {
+             0, -0.684547105928689, 0.28903179694447095`}, {
+             0, -0.6374239897486895, 0.34857204732181507`}, {
+             0, -0.5877852522924732, 0.40673664307579976`}, {
+             0, -0.5358267949789963, 0.4632960351198618}, {
+             0, -0.48175367410171527`, 0.51802700937313}, {
+             0, -0.42577929156507216`, 0.5707135676844318}, {
+             0, -0.3681245526846778, 0.6211477802783103}, {
+             0, -0.30901699437494756`, 0.6691306063588578}, {
+             0, -0.2486898871648553, 0.7144726796328028}, {
+             0, -0.18738131458572463`, 0.7569950556517562}, {
+             0, -0.1253332335643046, 0.7965299180241958}, {
+             0, -0.06279051952931321, 0.8329212407100994}, {
+             0, -1.8369701987210297`*^-16, 0.8660254037844384}, {
+             0, 0.06279051952931283, 0.8957117602394125}, {
+             0, 0.12533323356430423`, 0.9218631515885004}, {
+             0, 0.18738131458572427`, 0.9443763702374808}, {
+             0, 0.24868988716485493`, 0.9631625667976581}, {
+             0, 0.30901699437494723`, 0.9781476007338056}, {
+             0, 0.36812455268467825`, 0.9892723329629883}, {
+             0, 0.4257792915650726, 0.9964928592495043}, {
+             0, 0.4817536741017157, 0.9997806834748455}, {
+             0, 0.535826794978996, 0.9991228300988584}, {
+             0, 0.5877852522924729, 0.9945218953682734}, {
+             0, 0.6374239897486893, 0.9859960370705051}, {
+             0, 0.6845471059286886, 0.9735789028731604}, {
+             0, 0.7289686274214112, 0.9573194975320675}, {
+             0, 0.7705132427757894, 0.9372819894918916}, {
+             0, 0.8090169943749473, 0.9135454576426011}, {
+             0, 0.8443279255020152, 0.8862035792312147}, {
+             0, 0.8763066800438636, 0.8553642601605068}, {
+             0, 0.9048270524660197, 0.8211492091337039}, {
+             0, 0.9297764858882515, 0.78369345732584}, {
+             0, 0.9510565162951535, 0.7431448254773946}, {
+             0, 0.968583161128631, 0.6996633405133661}, {
+             0, 0.9822872507286887, 0.6534206039901057}, {
+             0, 0.9921147013144778, 0.6045991148623755}, {
+             0, 0.9980267284282716, 0.5533915492433442}, {
+             0, 1., 0.5000000000000004}}]}}, ImageSize -> 500, 
+         BoxRatios -> {3, 1, 1}, Boxed -> False, 
+         ViewPoint -> {1.152245850052173, -3.1807506093481455`, 
+          0.07179876161150522}]},
+       "RowDefault"]}
+    },
+    DefaultBaseStyle->"Column",
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+   "Column"],
+  DynamicModuleValues:>{}]], "Output",
+ CellChangeTimes->{
+  3.810964305222597*^9, 3.810964408002144*^9, {3.81096443877258*^9, 
+   3.8109644656755037`*^9}, 3.8109649284159603`*^9, {3.810965000492137*^9, 
+   3.8109650727353334`*^9}, {3.8109651400736046`*^9, 
+   3.8109652200640306`*^9}, {3.8109652780445337`*^9, 3.8109653151424932`*^9}, 
+   3.8109654368956285`*^9, 3.8109669837118087`*^9},
+ CellLabel->"Out[2]=",ExpressionUUID->"092d02c1-8566-49e3-8dc6-e78ee4ffac7b"]
+}, Open  ]]
+},
+WindowSize->{949., 502.5},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (2020\:5e743\:670814\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"59dc6d2e-0286-4fc1-8ecf-a0ad584e29f3"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 7314, 178, 493, "Input",ExpressionUUID->"970452ba-4113-4ce2-8331-d8d54fe47add"],
+Cell[CellGroupData[{
+Cell[7897, 202, 582, 10, 44, "Input",ExpressionUUID->"a4da9fb9-6b48-4037-9006-dcd6ed5fadc3"],
+Cell[8482, 214, 20217, 386, 542, "Output",ExpressionUUID->"092d02c1-8566-49e3-8dc6-e78ee4ffac7b"]
+}, Open  ]]
+}
+]
+*)
+
